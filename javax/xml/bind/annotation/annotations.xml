@@ -1,0 +1,5 @@
+<root>
+    <item name='javax.xml.bind.annotation.XmlRegistry'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
