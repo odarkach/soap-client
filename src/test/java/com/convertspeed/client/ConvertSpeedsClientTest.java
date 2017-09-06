@@ -1,5 +1,7 @@
 package com.convertspeed.client;
 
+import javax.xml.ws.soap.SOAPFaultException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -37,5 +39,20 @@ public class ConvertSpeedsClientTest {
     public void convertPositiveInfinitySpeedsTest () {
         Double actualResult = convertSpeedsSoap.convertSpeed(Double.POSITIVE_INFINITY, SpeedUnit.KILOMETERS_PERHOUR, SpeedUnit.CENTIMETERS_PERSECOND);
         assertEquals (Double.isInfinite(actualResult), true);
+    }
+
+    @Test
+    public void convertNegativeTest () {
+        Double actualResult = convertSpeedsSoap.convertSpeed (SpeedUnit.KILOMETERS_PERHOUR, SpeedUnit.CENTIMETERS_PERSECOND);
+    }
+
+    @Test(expectedExceptions = SOAPFaultException.class)
+    public void checkResponseWithIncorrectFromUnitValue() {
+        try {
+            convertSpeedsSoap.convertSpeed(100, SpeedUnit.DASHA, SpeedUnit.MILES_PERHOUR);
+        } catch (SOAPFaultException e) {
+            Assert.assertTrue(e.getMessage().contains("'Dasha' is not a valid value for SpeedUnit"));
+            throw e;
+        }
     }
 }

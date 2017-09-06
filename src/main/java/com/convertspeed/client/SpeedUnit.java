@@ -52,7 +52,10 @@ public enum SpeedUnit {
     @XmlEnumValue("leaguesPerday")
     LEAGUES_PERDAY("leaguesPerday"),
     @XmlEnumValue("Mach")
-    MACH("Mach");
+    MACH("Mach"),
+    //Fake Unit for testing of incorrect input
+    @XmlEnumValue("Dasha")
+    DASHA("Dasha");
     private final String value;
 
     SpeedUnit(String v) {
